@@ -19,10 +19,14 @@ namespace HimsLogs.Data.Repo
         }
         public async Task<string> Add(Log input)
         {
-            await AddAsync(input);
-            await context.SaveChangesAsync();
-            input.CreatedAt = DateTime.Now;
-            return "Added successfully";
+            if (input.LogLevelId != null && input.LogLevelId != 0)
+            {
+                await AddAsync(input);
+                await context.SaveChangesAsync();
+                input.CreatedAt = DateTime.Now;
+                return "Added successfully";
+            }
+            throw new Exception("LogLevelId is required");
         }
         public async Task<List<Log>> GetAll()
         {
@@ -55,7 +59,22 @@ namespace HimsLogs.Data.Repo
             }
             throw new Exception("LogsLogLevelId NOT FOUND");
         }
-
+        public async Task<string> DeleteLogs(int id)
+        {
+            var member = await context.Logs.FindAsync(id);
+            if (member != null)
+            {
+                context.Logs.Remove(member);
+                await context.SaveChangesAsync();
+                return "Deleted";
+            }
+            return "Not deleted"; 
+        }
+        //await context.Remove(id);
+       
+            
+           
+        }
 
     }
-}
+

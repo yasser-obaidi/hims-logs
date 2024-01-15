@@ -41,5 +41,16 @@ namespace HimsLogs.Services
 
 
         }
+        
+             public async Task<string> DeleteLogs(int id)
+        {
+            var res = await unit.logsRepo.DeleteLogs(id);
+            return res;
+
+
+        }
+
+
     }
 }
+

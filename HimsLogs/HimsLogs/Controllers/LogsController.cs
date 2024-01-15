@@ -87,5 +87,23 @@ namespace HimsLogs.Controllers
             }
 
         }
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> DeleteLog(int input)
+        {
+
+
+
+            try
+            {
+                var res = await service.DeleteLogs(input);
+
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
     }
 }

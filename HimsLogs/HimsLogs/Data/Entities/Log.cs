@@ -10,6 +10,7 @@ namespace HimsLogs.Data.Entities
 
         [Key]
         public int Id { get; set; }
+        [Required]
         public int LogLevelId { get; set; }
         public string ShortMessage { get; set; }
         public string FullMessage { get; set; }
